@@ -492,7 +492,7 @@ class HTTP(object):
             return response_body
 
         if isinstance(response_body, bytes):
-            response_body = response_body.decode()
+            response_body = response_body.decode('utf-8', 'replace')
         return response_body
 
     def response_body_should_contain(self, should_contain):

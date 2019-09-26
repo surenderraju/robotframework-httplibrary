@@ -42,6 +42,7 @@ class HTTP(object):
 
     ROBOT_LIBRARY_VERSION = "1.0.2"
 
+
     class Context(object):
         def __init__(self, http, host=None, scheme='http'):
             # daddy

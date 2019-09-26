@@ -1,7 +1,7 @@
 from __future__ import absolute_import
 from future import standard_library
 standard_library.install_aliases()
-from builtins import object
+from builtins import object, str
 from robot.api import logger
 
 from base64 import b64encode
@@ -486,6 +486,10 @@ class HTTP(object):
         | Should Start With   | ${body}           | <?xml version="1.0" encoding="UTF-8" |
         """
         response_body = self.response.body
+        # In python2 response comes as str, which satisfies below bytes condition too and fails at decode call.
+        if isinstance(response_body, str):
+            return response_body
+
         if isinstance(response_body, bytes):
             response_body = response_body.decode()
         return response_body

@@ -504,12 +504,13 @@ class HTTP(object):
         | Response Body Should Contain | version="1.0"    |
         | Response Body Should Contain | encoding="UTF-8" |
         """
-        logger.debug('Testing whether "%s" contains "%s".' % (
-            self.response.body, should_contain))
 
         response = self.response.body
         if isinstance(response, bytes):
-            response = response.decode("utf-8")
+            response = response.decode("utf-8", "replace")
+
+        logger.debug('Testing whether "%s" contains "%s".' % (response, should_contain))
+
         assert should_contain in response, \
             '"%s" should have contained "%s", but did not.' % (
                 self.response.body, should_contain)
